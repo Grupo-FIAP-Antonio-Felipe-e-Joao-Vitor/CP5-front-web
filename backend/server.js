@@ -36,14 +36,14 @@ app.post("/registro", async (req, res) => {
         const { email, cpf, senha } = req.body;
         const usuarios = consultarDados(caminhoUsuarios);
         if (!email || !cpf || !senha) return res.status(400).json({ message: "Todos os dados são obrigatórios." });
-        if (usuarios.find(u => u.email === email)) return res.status(400).json({ error: "Este email já está sendo utilizado." });
-        if (usuarios.find(u => u.cpf === cpf)) return res.status(400).json({ error: "Este CPF já está sendo utilizado." });
+        if (usuarios.find(u => u.email === email)) return res.status(400).json({ message: "Este email já está sendo utilizado." });
+        if (usuarios.find(u => u.cpf === cpf)) return res.status(400).json({ message: "Este CPF já está sendo utilizado." });
 
         const hashSenha = await bcrypt.hash(senha, 10);
-        const novoUsuario = { id: gerarID(usuarios), email: email, cpf: cpf, senha: hashSenha };
+        const novoUsuario = { id: gerarID(usuarios), email: email, cpf: cpf, senha: hashSenha, role: "User" };
         usuarios.push(novoUsuario);
         salvarDados(caminhoUsuarios, usuarios);
-        return res.status(200).json({ message: "Usuário registrado com sucesso." });
+        return res.status(201).json({ message: "Usuário registrado com sucesso." });
     } catch (error) {
         return res.status(500).json({ message: "Erro interno.", error: error });
     }
