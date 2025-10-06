@@ -9,7 +9,7 @@ const Registro = () => {
             <form className='flex flex-col gap-5 mt-10'>
                 
                 <div className='flex flex-col gap-2'>
-                    <label className='text-blue-400 text-2xl uppercase font-bold'>Email</label>
+                    <label className='text-white text-2xl uppercase font-bold'>Email</label>
                     <input 
                         className='border-2 border-white rounded h-10 text-gray-100 px-2'
                         placeholder='DIGITE SEU EMAIL'
@@ -19,7 +19,7 @@ const Registro = () => {
                 </div>
 
                 <div className='flex flex-col gap-2'>
-                    <label className='text-blue-400 text-2xl uppercase font-bold'>CPF</label>
+                    <label className='text-white text-2xl uppercase font-bold'>CPF</label>
                     <input 
                         className='border-2 border-white rounded h-10 text-gray-100 px-2'
                         placeholder='DIGITE SEU CPF'
@@ -29,7 +29,7 @@ const Registro = () => {
                 </div>
 
                 <div className='flex flex-col gap-2'>
-                    <label className='text-blue-400 text-2xl uppercase font-bold'>Senha</label>
+                    <label className='text-white text-2xl uppercase font-bold'>Senha</label>
                     <input 
                         className='border-2 border-white rounded h-10 text-gray-100 px-2'
                         placeholder='DIGITE SUA SENHA'
