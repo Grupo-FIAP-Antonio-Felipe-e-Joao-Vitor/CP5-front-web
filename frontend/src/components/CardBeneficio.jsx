@@ -1,6 +1,6 @@
 const CardBeneficio = ({ icone, frase }) => {
     return (
-        <div className="bg-gray-700 w-[300px] h-[300px] flex flex-col items-center justify-around border-2 border-white p-2 rounded-2xl">
+        <div className="bg-gray-900 border border-gray-700 w-[300px] h-[300px] flex flex-col items-center justify-around p-2 rounded-2xl">
             <span className="text-white text-8xl">
                 {icone}
             </span>

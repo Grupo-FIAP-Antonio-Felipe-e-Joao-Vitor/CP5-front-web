@@ -3,6 +3,7 @@ import HeroIMG from "../assets/hero.png";
 import CardBeneficio from "../components/CardBeneficio";
 import Titulo from "../components/Titulo";
 import CardModalidade from "../components/CardModalidade";
+import CardPlano from "../components/CardPlano";
 
 const Home = () => {
     return (
@@ -98,107 +99,23 @@ const Home = () => {
             <section className="min-h-screen flex flex-col items-center bg-black opacity-90">
                 <Titulo frase="Planos" />
                 <section className="flex flex-col md:flex-row gap-4 mt-10">
-                    <div className=" w-[300px] h-[300px] flex flex-col items-center justify-around border-2 border-white p-2 rounded-2xl">
-                        <span className='text-yellow-400 font-bold uppercase text-2xl'>Plano Black</span>
-                        <ul className="text-white text-4xl">
-                            <li className="flex items-center gap-2">
-                                <MdDone className="size-5 text-green-400"/>
-                                <span className="text-green-500 text-xl font-bold">Pilates</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdDone className="size-5 text-green-400"/>
-                                <span className="text-green-500 text-xl font-bold">Dança</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdDone className="size-5 text-green-400"/>
-                                <span className="text-green-500 text-xl font-bold">Crossfit</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdDone className="size-5 text-green-400"/>
-                                <span className="text-green-500 text-xl font-bold">Funcional</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdDone className="size-5 text-green-400"/>
-                                <span className="text-green-500 text-xl font-bold">Personal Trainer</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdDone className="size-5 text-green-400"/>
-                                <span className="text-green-500 text-xl font-bold">Musculação</span>
-                            </li>
-                        </ul>
-                        <p>
-                            <span className="text-xl text-white text-center uppercase">3 Messes - </span>
-                            <span className="text-2xl text-yellow-400 text-center font-bold uppercase">R$120,99</span>
-                        </p>
-                    </div>
+                    
+                    <CardPlano 
+                        nomePlano="Plano Black" 
+                        beneficios={[
+                            {
+                                "nome": "Musculação",
+                                "ativo": true
+                            },
+                            {
+                                "nome": "Pilates",
+                                "ativo": false
+                            }
+                        ]}
+                        tempo="2"
+                        preco="12,99"
+                    />
 
-                    <div className=" w-[300px] h-[300px] flex flex-col items-center justify-around border-2 border-white p-2 rounded-2xl">
-                        <span className='text-yellow-400 font-bold uppercase text-2xl'>Plano Fit</span>
-                        <ul className="text-white text-4xl">
-                            <li className="flex items-center gap-2">
-                                <MdDone className="size-5 text-green-400"/>
-                                <span className="text-green-500 text-xl font-bold">Pilates</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdDone className="size-5 text-green-400"/>
-                                <span className="text-green-500 text-xl font-bold">Dança</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdDone className="size-5 text-green-400"/>
-                                <span className="text-green-500 text-xl font-bold">Crossfit</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdDone className="size-5 text-green-400"/>
-                                <span className="text-green-500 text-xl font-bold">Funcional</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdBlock className="size-5 text-red-500"/>
-                                <span className="text-red-500 text-xl font-bold">Personal Trainer</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdBlock className="size-5 text-red-500"/>
-                                <span className="text-red-500 text-xl font-bold">Musculação</span>
-                            </li>
-                        </ul>
-                        <p>
-                            <span className="text-xl text-white text-center uppercase">3 Messes - </span>
-                            <span className="text-2xl text-yellow-400 text-center font-bold uppercase">R$99,99</span>
-                        </p>
-                    </div>
-
-                    <div className=" w-[300px] h-[300px] flex flex-col items-center justify-around border-2 border-white p-2 rounded-2xl">
-                        <span className='text-yellow-400 font-bold uppercase text-2xl'>Plano Smart</span>
-                        <ul className="text-white text-4xl">
-                            <li className="flex items-center gap-2">
-                                <MdDone className="size-5 text-green-400"/>
-                                <span className="text-green-500 text-xl font-bold">Pilates</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdDone className="size-5 text-green-400"/>
-                                <span className="text-green-500 text-xl font-bold">Dança</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdBlock className="size-5 text-red-500"/>
-                                <span className="text-red-500 text-xl font-bold">Crossfit</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdBlock className="size-5 text-red-500"/>
-                                <span className="text-red-500 text-xl font-bold">Funcional</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdBlock className="size-5 text-red-500"/>
-                                <span className="text-red-500 text-xl font-bold">Personal Trainer</span>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <MdBlock className="size-5 text-red-500"/>
-                                <span className="text-red-500 text-xl font-bold">Musculação</span>
-                            </li>
-                        </ul>
-                        <p>
-                            <span className="text-xl text-white text-center uppercase">3 Messes - </span>
-                            <span className="text-2xl text-yellow-400 text-center font-bold uppercase">R$49,99</span>
-                        </p>
-                    </div>
                 </section>
             </section>
         </section>
