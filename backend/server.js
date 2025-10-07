@@ -10,6 +10,7 @@ const HOST = "localhost";
 const PORT = 5001;
 
 const caminhoUsuarios = path.join(__dirname, "./data/usuarios.json");
+const caminhoPlanos = path.join(__dirname, "./data/planos.json");
 
 const app = express();
 app.use(express.json());
@@ -87,4 +88,23 @@ app.post("/login", async (req, res) => {
         return res.status(500).json({ message: "Erro interno.", error: error });
     };
 })
+
+// CRUD planos
+
+// Adicionar plano
+app.post("/planos", (req, res) => {
+    const { nome, beneficios, tempo, preco } = req.body;
+    const planos = consultarDados(caminhoPlanos);
+
+    if (!nome || !beneficios || !tempo || !preco) return res.status(400).json({ message: "Todos os dados são obrigatórios." });
+
+    if (planos.find((plano) => plano.nome === nome)) return res.status(400).json({ message: "Já existe um plano com esse nome." });
+
+    const novoPlano = { id: gerarID(planos), nome: nome, beneficios: beneficios, tempo: tempo, preco: preco };
+    planos.push(novoPlano);
+    salvarDados(caminhoPlanos, planos);
+
+    return res.status(201).json({ message: "Plano criado com sucesso." })
+})
+
 app.listen(PORT, console.log(`Servidor rodando em http://${HOST}:${PORT}`))

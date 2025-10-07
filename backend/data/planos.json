@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "nome": "Plano Black",
+    "beneficios": [
+      {
+        "nome": "Pilates",
+        "ativo": true
+      },
+      {
+        "nome": "Musculação",
+        "ativo": false
+      }
+    ],
+    "tempo": 4,
+    "preco": 20
+  }
+]
