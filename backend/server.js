@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const path = require("path");
 const fs = require("fs");
 
+const JWT_SECRET = "846e2ed72bc108eed63b825c812875a2";
 const HOST = "localhost";
 const PORT = 5001;
 
@@ -40,14 +41,50 @@ app.post("/registro", async (req, res) => {
         if (usuarios.find(u => u.cpf === cpf)) return res.status(400).json({ message: "Este CPF já está sendo utilizado." });
 
         const hashSenha = await bcrypt.hash(senha, 10);
-        const novoUsuario = { id: gerarID(usuarios), email: email, cpf: cpf, senha: hashSenha, role: "User" };
+        const novoUsuario = { id: gerarID(usuarios), email: email, cpf: cpf, hashSenha: hashSenha, role: "User" };
         usuarios.push(novoUsuario);
         salvarDados(caminhoUsuarios, usuarios);
         return res.status(201).json({ message: "Usuário registrado com sucesso." });
     } catch (error) {
         return res.status(500).json({ message: "Erro interno.", error: error });
-    }
+    };
+});
 
+// Login de usuarios
+app.post("/login", async (req, res) => {
+    try {
+        const { usuario, senha } = req.body;
+        const usuarios = consultarDados(caminhoUsuarios);
+        
+        if (!usuario || !senha) return res.status(400).json({ message: "Todos os dados são obrigatórios." });
+        
+        const user = usuarios.find((u) => {
+            return u.email === usuario || // logando com email
+            u.cpf === usuario             // logando com cpf
+        });
+
+        if (!user) return res.status(404).json({ message: "Usuário não encontrado." });
+
+        const senhaCorreta = await bcrypt.compare(senha, user.hashSenha);
+        if (!senhaCorreta) return res.status(400).json({ message: "Senha incorreta." })
+        if (senhaCorreta) {
+            const token = jwt.sign(
+                { id: user.id, email: user.email, cpf: user.cpf },
+                JWT_SECRET,
+                { expiresIn: "10m" }
+            )
+
+
+            return res.status(200).json({ 
+                message: "Usuario logado com sucesso.",
+                usuario: { id: user.id, email: user.email, cpf: user.cpf },
+                token: token 
+            })
+        }
+        
+
+    } catch (error) {
+        return res.status(500).json({ message: "Erro interno.", error: error });
+    };
 })
-
 app.listen(PORT, console.log(`Servidor rodando em http://${HOST}:${PORT}`))
