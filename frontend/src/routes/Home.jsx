@@ -7,18 +7,18 @@ import CardModalidade from "../components/CardModalidade";
 const Home = () => {
     return (
         <section className="bg-black opacity-90">
-            <section className="relative min-h-screen flex items-center justify-end p-8">
+            <section className="relative md:min-h-screen h-100 flex items-end md:items-center justify-end p-8">
                 <img
                     src={HeroIMG}
                     alt="Imagem principal"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute md:blur-[5px] inset-0 w-full md:h-170 h-full object-cover object-left"
                 />
 
                 <div className="absolute inset-0 bg-black opacity-70"></div>
 
-                <div className="relative z-10 text-white flex flex-col items-end">
-                    <h1 className="text-white text-5xl mb-2 uppercase font-extrabold text-center md:text-right">Transforme seu corpo hoje</h1>
-                    <h2 className="text-yellow-400 text-2xl md:text-4xl max-w-xl font-bold text-center md:text-right">Treinos personalizados, ambiente moderno e profissionais dedicados.</h2>
+                <div className="relative z-10 text-white flex flex-col items-start md:items-end">
+                    <h1 className="text-white text-3xl md:text-5xl mb-2 uppercase font-extrabold text-left md:text-right">Transforme seu corpo hoje</h1>
+                    <h2 className="text-yellow-400 text-xl md:text-4xl max-w-xl font-bold text-left md:text-right">Treinos personalizados, ambiente moderno e profissionais dedicados.</h2>
                 </div>
             </section>
             <section className="min-h-screen flex flex-col justify-center items-center bg-black opacity-90">

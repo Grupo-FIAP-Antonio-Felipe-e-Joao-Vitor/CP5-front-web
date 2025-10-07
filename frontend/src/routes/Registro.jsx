@@ -36,7 +36,7 @@ const Registro = () => {
     return (
         <section className='flex justify-center items-center min-h-screen bg-black opacity-90'>
             <section className='md:w-1/2 p-8'>
-                <h1 className="text-yellow-400 uppercase font-bold text-5xl mt-10">Matricule-se já!</h1>
+                <h1 className="text-yellow-400 uppercase font-bold text-4xl md:text-5xl mt-10">Matricule-se já!</h1>
                 <form
                     className='flex flex-col gap-5 mt-10'
                     onSubmit={handleSubmit(registrarUsuario)}

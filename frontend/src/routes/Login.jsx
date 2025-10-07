@@ -8,7 +8,7 @@ const Login = () => {
                 <img className="h-screen w-full object-cover object-top" src={LoginIMG} alt="" />
             </section>
             <section className="md:w-1/2 p-8">
-                <h1 className="text-yellow-400 uppercase font-bold text-5xl mt-10">Entre já!</h1>
+                <h1 className="text-yellow-400 uppercase font-bold text-4xl md:text-5xl mt-10">Entre já!</h1>
                 <form className="flex flex-col gap-5 mt-10">
 
                     <div className='flex flex-col gap-2'>
