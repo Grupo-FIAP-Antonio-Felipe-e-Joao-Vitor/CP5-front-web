@@ -1,7 +1,7 @@
 import { MdBlock, MdDone } from "react-icons/md";
 const CardPlano = ({ nomePlano, beneficios, tempo, preco }) => {
     return (
-        <div className="w-[320px] h-auto bg-gray-900 border border-gray-700 rounded-3xl p-6 flex flex-col items-center shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <div className="w-[320px] h-[550px] bg-gray-900 border border-gray-700 rounded-3xl p-6 flex flex-col items-center justify-between shadow-lg hover:shadow-2xl transition-shadow duration-300">
 
             <div className="text-yellow-400 font-extrabold uppercase px-4 py-1 rounded-full text-3xl mb-4">
                 {nomePlano}

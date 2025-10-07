@@ -4,12 +4,60 @@
     "nome": "Plano Black",
     "beneficios": [
       {
+        "nome": "Musculação",
+        "ativo": true
+      },
+      {
+        "nome": "Crossfit",
+        "ativo": true
+      },
+      {
+        "nome": "Funcional",
+        "ativo": true
+      },
+      {
+        "nome": "Dança",
+        "ativo": true
+      },
+      {
         "nome": "Pilates",
         "ativo": true
       },
       {
+        "nome": "Personal Trainer",
+        "ativo": true
+      }
+    ],
+    "tempo": 4,
+    "preco": 20
+  },
+  {
+    "id": 2,
+    "nome": "Plano Fit",
+    "beneficios": [
+      {
         "nome": "Musculação",
         "ativo": false
+      },
+      {
+        "nome": "Crossfit",
+        "ativo": true
+      },
+      {
+        "nome": "Funcional",
+        "ativo": true
+      },
+      {
+        "nome": "Dança",
+        "ativo": true
+      },
+      {
+        "nome": "Pilates",
+        "ativo": true
+      },
+      {
+        "nome": "Personal Trainer",
+        "ativo": true
       }
     ],
     "tempo": 4,

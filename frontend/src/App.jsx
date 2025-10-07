@@ -6,7 +6,7 @@ import Login from "./routes/Login"
 import Sobre from "./routes/Sobre"
 import Planos from "./routes/Planos"
 import { useState } from "react"
-
+import CriarPlano from "./routes/CriarPlano"
 
 function App() {
   
@@ -14,6 +14,11 @@ function App() {
     const usuarioSalvo = localStorage.getItem("usuario");
     return usuarioSalvo ? JSON.parse(usuarioSalvo) : null;
   });
+
+  const [token, setToken] = useState(() => {
+    const tokenSalvo = localStorage.getItem("token");
+    return tokenSalvo ? tokenSalvo : null;
+  })
 
   return (
     <BrowserRouter>
@@ -24,7 +29,8 @@ function App() {
           <Route path="/registro" element={<Registro />}/>
           <Route path="/login" element={<Login setUsuario={setUsuario}/>}/>
           <Route path="/sobre" element={<Sobre />}/>
-          <Route path="/planos" element={<Planos />}/>
+          <Route path="/planos" element={<Planos usuario={usuario} />}/>
+          <Route path="/criarPlano" element={<CriarPlano usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken}/>} />
         </Routes>
       </main>
     </BrowserRouter>
