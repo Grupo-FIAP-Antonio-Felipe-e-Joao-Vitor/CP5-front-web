@@ -2,36 +2,35 @@ import axios from "axios";
 import LoginIMG from "../assets/loginImage.png"
 import Swal from 'sweetalert2';
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
-const Login = () => {
+const Login = ({ setUsuario }) => {
     const { register, handleSubmit, reset } = useForm();
+    const navigate = useNavigate();
 
     const url = "http://localhost:5001/login";
 
     async function verificaUsuario(data) {
         try {
             const response = await axios.post(url, data);
-            const token = response.data.token;
-            const usuario = response.data.usuario;
-
-            localStorage.setItem("token", token);
-            localStorage.setItem("usuario", usuario);
-
-            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
             if (response.status === 200) {
-                Swal.fire({
-                    title: "Matriculado com sucesso",
-                    icon: "success",
-                });
+                const token = response.data.token;
+                const usuario = response.data.usuario;
+
+                setUsuario(usuario)
+                localStorage.setItem("token", token);
+                localStorage.setItem("usuario", JSON.stringify(usuario));
+
+                axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+                navigate("/")
                 reset();
 
             }
         } catch (error) {
             const status = error.response.status;
             const result = error.response.data;
-            if (status === 400 ) { 
+            if (status === 400) {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
@@ -40,7 +39,7 @@ const Login = () => {
                 reset();
             };
 
-            if (status === 404) { 
+            if (status === 404) {
                 Swal.fire({
                     icon: "warning",
                     title: "Oops...",
