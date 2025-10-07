@@ -126,6 +126,15 @@ app.post("/planos", autenticaToken, (req, res) => {
     }
 })
 
+// Ver todos os planos
+app.get("/planos", (req, res) => {
+    try {
+        const planos = consultarDados(caminhoPlanos);
+        res.status(200).json({ planos: planos });
+    } catch (error) {
+        return res.status(500).json({ message: "Erro interno.", error: error });
+    }
+})
 
 
 app.listen(PORT, console.log(`Servidor rodando em http://${HOST}:${PORT}`))
