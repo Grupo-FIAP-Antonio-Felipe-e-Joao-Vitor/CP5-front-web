@@ -4,6 +4,7 @@ import Home from "./routes/Home"
 import Registro from "./routes/Registro"
 import Login from "./routes/Login"
 import Sobre from "./routes/Sobre"
+import Planos from "./routes/Planos"
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/registro" element={<Registro />}/>
           <Route path="/login" element={<Login />}/>
           <Route path="/sobre" element={<Sobre />}/>
+          <Route path="/planos" element={<Planos />}/>
         </Routes>
       </main>
     </BrowserRouter>

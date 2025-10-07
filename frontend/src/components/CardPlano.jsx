@@ -20,10 +20,10 @@ const CardPlano = ({ nomePlano, beneficios, tempo, preco }) => {
                             </li>
                         )
                     ) : ((
-                            <li key={beneficio.nome} className="flex items-center gap-3" >
-                                <MdBlock className="text-red-500 text-2xl" />
-                                <span className="text-red-500 font-semibold text-lg">{beneficio.nome}</span>
-                            </li>
+                        <li key={beneficio.nome} className="flex items-center gap-3" >
+                            <MdBlock className="text-red-500 text-2xl" />
+                            <span className="text-red-500 font-semibold text-lg">{beneficio.nome}</span>
+                        </li>
                     ))
                 )}
             </ul>
@@ -33,9 +33,17 @@ const CardPlano = ({ nomePlano, beneficios, tempo, preco }) => {
 
             {/* Preço e duração */}
             <div className="flex flex-col items-center mb-4">
-                <span className="text-gray-300 uppercase text-sm">
-                    {tempo} Meses
-                </span>
+                {
+                    tempo > 1 ? (
+                        <span className="text-gray-300 uppercase text-sm">
+                            {tempo} Messes
+                        </span>
+                    ) : (
+                        <span className="text-gray-300 uppercase text-sm">
+                            {tempo} Mês
+                        </span>
+                    )
+                }
                 <span className="text-yellow-400 font-bold text-3xl mt-1">
                     R${preco}
                 </span>
