@@ -56,12 +56,12 @@ app.post("/login", async (req, res) => {
     try {
         const { usuario, senha } = req.body;
         const usuarios = consultarDados(caminhoUsuarios);
-        
+
         if (!usuario || !senha) return res.status(400).json({ message: "Todos os dados são obrigatórios." });
-        
+
         const user = usuarios.find((u) => {
             return u.email === usuario || // logando com email
-            u.cpf === usuario             // logando com cpf
+                u.cpf === usuario             // logando com cpf
         });
 
         if (!user) return res.status(404).json({ message: "Usuário não encontrado." });
@@ -70,19 +70,19 @@ app.post("/login", async (req, res) => {
         if (!senhaCorreta) return res.status(400).json({ message: "Senha incorreta." })
         if (senhaCorreta) {
             const token = jwt.sign(
-                { id: user.id, email: user.email, cpf: user.cpf },
+                { id: user.id, email: user.email, cpf: user.cpf, role: user.role },
                 JWT_SECRET,
                 { expiresIn: "10m" }
             )
 
 
-            return res.status(200).json({ 
+            return res.status(200).json({
                 message: "Usuario logado com sucesso.",
                 usuario: { id: user.id, email: user.email, cpf: user.cpf },
-                token: token 
+                token: token
             })
         }
-        
+
 
     } catch (error) {
         return res.status(500).json({ message: "Erro interno.", error: error });
@@ -91,20 +91,41 @@ app.post("/login", async (req, res) => {
 
 // CRUD planos
 
+// Verificar se o usuario está logado
+const autenticaToken = (req, res, next) => {
+    const auth = req.headers['authorization'];
+    const token = auth && auth.split(' ')[1];
+    if (token == null) return res.sendStatus(401);
+
+    jwt.verify(token, JWT_SECRET, (error, user) => {
+        if (error) return res.sendStatus(403)
+        req.user = user;
+        next();
+    })
+}
+
 // Adicionar plano
-app.post("/planos", (req, res) => {
-    const { nome, beneficios, tempo, preco } = req.body;
-    const planos = consultarDados(caminhoPlanos);
+app.post("/planos", autenticaToken, (req, res) => {
+    try {
+        const { nome, beneficios, tempo, preco } = req.body;
+        const planos = consultarDados(caminhoPlanos);
 
-    if (!nome || !beneficios || !tempo || !preco) return res.status(400).json({ message: "Todos os dados são obrigatórios." });
+        if (req.user.role !== "Admin") return res.status(401).json({ message: "Você não possui permissão para acessa esta área." })
 
-    if (planos.find((plano) => plano.nome === nome)) return res.status(400).json({ message: "Já existe um plano com esse nome." });
+        if (!nome || !beneficios || !tempo || !preco) return res.status(400).json({ message: "Todos os dados são obrigatórios." });
 
-    const novoPlano = { id: gerarID(planos), nome: nome, beneficios: beneficios, tempo: tempo, preco: preco };
-    planos.push(novoPlano);
-    salvarDados(caminhoPlanos, planos);
+        if (planos.find((plano) => plano.nome === nome)) return res.status(400).json({ message: "Já existe um plano com esse nome." });
 
-    return res.status(201).json({ message: "Plano criado com sucesso." })
+        const novoPlano = { id: gerarID(planos), nome: nome, beneficios: beneficios, tempo: tempo, preco: preco };
+        planos.push(novoPlano);
+        salvarDados(caminhoPlanos, planos);
+
+        return res.status(201).json({ message: "Plano criado com sucesso." })
+    } catch (error) {
+        return res.status(500).json({ message: "Erro interno.", error: error });
+    }
 })
+
+
 
 app.listen(PORT, console.log(`Servidor rodando em http://${HOST}:${PORT}`))

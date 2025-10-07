@@ -11,13 +11,22 @@ const Login = () => {
 
     async function verificaUsuario(data) {
         try {
-            const response = await axios.post(url, data)
+            const response = await axios.post(url, data);
+            const token = response.data.token;
+            const usuario = response.data.usuario;
+
+            localStorage.setItem("token", token);
+            localStorage.setItem("usuario", usuario);
+
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
             if (response.status === 200) {
                 Swal.fire({
                     title: "Matriculado com sucesso",
                     icon: "success",
                 });
                 reset();
+
             }
         } catch (error) {
             const status = error.response.status;
