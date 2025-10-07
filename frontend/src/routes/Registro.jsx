@@ -30,6 +30,10 @@ const Registro = () => {
                 });
                 reset()
             }
+
+            else {
+                console.log(error);
+            }
         }
     }
 
