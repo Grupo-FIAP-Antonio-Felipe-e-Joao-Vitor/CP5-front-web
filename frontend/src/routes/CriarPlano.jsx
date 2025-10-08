@@ -145,7 +145,7 @@ const CriarPlano = ({ usuario, setUsuario, token, setToken }) => {
 
           <div className="flex flex-col gap-2">
             <label className="text-white text-lg md:text-2xl uppercase font-bold">
-              Tempo
+              Tempo (em meses)
             </label>
             <input
               className="border-2 border-white rounded h-10 text-gray-100 px-2 bg-transparent focus:outline-none focus:border-yellow-400"

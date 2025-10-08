@@ -118,7 +118,7 @@ const CardPlano = ({ id, isAdmin, nomePlano, beneficios, tempo, preco, token, se
         {
           tempo > 1 ? (
             <span className="text-gray-300 uppercase text-sm">
-              {tempo} Messes
+              {tempo} Meses
             </span>
           ) : (
             <span className="text-gray-300 uppercase text-sm">
