@@ -155,7 +155,7 @@ app.put("/planos/:id", autenticaToken, (req, res) => {
         if (req.user.role !== "Admin") return res.status(401).json({ message: "Você não possui permissão para acessa esta área." });
 
         const planos = consultarDados(caminhoPlanos);
-        const plano = planos.find((p) => p.id === id);
+        const plano = planos.find((p) => Number(p.id) === Number(id));
 
         if (!plano) return res.status(404).json({ message: "Plano não encontrado." });
 
@@ -168,6 +168,28 @@ app.put("/planos/:id", autenticaToken, (req, res) => {
 
         return res.status(200).json({ message: "Plano atualizado com sucesso", plano: plano });
 
+    } catch (error) {
+        return res.status(500).json({ message: "Erro interno.", error: error });
+    }
+})
+
+// Deletar plano
+app.delete("/planos/:id", autenticaToken, (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (req.user.role !== "Admin") return res.status(401).json({ message: "Você não possui permissão para acessa esta área." });
+
+        const planos = consultarDados(caminhoPlanos);
+        const plano = planos.find((p) => Number(p.id) === Number(id));
+
+        if (!plano) return res.status(404).json({ message: "Plano não encontrado." });
+
+        const index = planos.findIndex((p) => p.id === id);
+        const planoRemovido = planos.splice(index, 1);
+        salvarDados(caminhoPlanos, planos);
+
+        return res.status(200).json({ message: "Plano removido.", plano: planoRemovido })
     } catch (error) {
         return res.status(500).json({ message: "Erro interno.", error: error });
     }
