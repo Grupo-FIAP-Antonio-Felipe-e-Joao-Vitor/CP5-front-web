@@ -146,5 +146,32 @@ app.get("/planos", (req, res) => {
     }
 })
 
+// Atualizar plano
+app.put("/planos/:id", autenticaToken, (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nome, beneficios, tempo, preco } = req.body;
+
+        if (req.user.role !== "Admin") return res.status(401).json({ message: "Você não possui permissão para acessa esta área." });
+
+        const planos = consultarDados(caminhoPlanos);
+        const plano = planos.find((p) => p.id === id);
+
+        if (!plano) return res.status(404).json({ message: "Plano não encontrado." });
+
+        plano.nome = nome ?? plano.nome;
+        plano.beneficios = beneficios ?? plano.beneficios;
+        plano.tempo = tempo ?? plano.tempo;
+        plano.preco = preco ?? plano.preco;
+
+        salvarDados(caminhoPlanos, planos);
+
+        return res.status(200).json({ message: "Plano atualizado com sucesso", plano: plano });
+
+    } catch (error) {
+        return res.status(500).json({ message: "Erro interno.", error: error });
+    }
+})
+
 
 app.listen(PORT, console.log(`Servidor rodando em http://${HOST}:${PORT}`))
