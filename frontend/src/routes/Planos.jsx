@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { MdOutlineAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-const Planos = ({ usuario }) => {
+const Planos = ({ usuario, token, setToken, setUsuario }) => {
     const [listaPlanos, setListaPlanos] = useState([]);
 
     const url = "http://localhost:5001/planos";
@@ -41,6 +41,10 @@ const Planos = ({ usuario }) => {
                                 beneficios={plano.beneficios}
                                 tempo={plano.tempo}
                                 preco={plano.preco}
+                                token={token}
+                                setToken={setToken}
+                                setUsuario={setUsuario}
+                                pegaPlanos={pegaPlanos()}
                             />
                         ))}
 

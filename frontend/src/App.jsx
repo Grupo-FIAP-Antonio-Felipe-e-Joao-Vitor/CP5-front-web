@@ -29,7 +29,7 @@ function App() {
           <Route path="/registro" element={<Registro />}/>
           <Route path="/login" element={<Login setUsuario={setUsuario} setToken={setToken}/>}/>
           <Route path="/sobre" element={<Sobre />}/>
-          <Route path="/planos" element={<Planos usuario={usuario} />}/>
+          <Route path="/planos" element={<Planos usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken} />}/>
           <Route path="/criarPlano" element={<CriarPlano usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken}/>} />
         </Routes>
       </main>
