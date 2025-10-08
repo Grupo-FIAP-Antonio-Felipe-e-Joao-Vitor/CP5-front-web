@@ -1,7 +1,71 @@
 [
   {
     "id": 1,
-    "nome": "Smart2",
+    "nome": "Smart",
+    "beneficios": [
+      {
+        "nome": "musculacao",
+        "ativo": true
+      },
+      {
+        "nome": "crossfit",
+        "ativo": true
+      },
+      {
+        "nome": "funcional",
+        "ativo": true
+      },
+      {
+        "nome": "danca",
+        "ativo": false
+      },
+      {
+        "nome": "pilates",
+        "ativo": false
+      },
+      {
+        "nome": "personal",
+        "ativo": false
+      }
+    ],
+    "tempo": "5",
+    "preco": "23,59"
+  },
+  {
+    "id": 2,
+    "nome": "Fit",
+    "beneficios": [
+      {
+        "nome": "musculacao",
+        "ativo": true
+      },
+      {
+        "nome": "crossfit",
+        "ativo": true
+      },
+      {
+        "nome": "funcional",
+        "ativo": true
+      },
+      {
+        "nome": "danca",
+        "ativo": false
+      },
+      {
+        "nome": "pilates",
+        "ativo": false
+      },
+      {
+        "nome": "personal",
+        "ativo": true
+      }
+    ],
+    "tempo": "5",
+    "preco": "39,99"
+  },
+  {
+    "id": 3,
+    "nome": "Diamond",
     "beneficios": [
       {
         "nome": "musculacao",
@@ -25,10 +89,10 @@
       },
       {
         "nome": "personal",
-        "ativo": false
+        "ativo": true
       }
     ],
-    "tempo": "2",
-    "preco": "23"
+    "tempo": "5",
+    "preco": "59,99"
   }
 ]

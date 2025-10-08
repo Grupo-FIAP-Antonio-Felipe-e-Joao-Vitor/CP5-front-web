@@ -36,8 +36,7 @@ const CardPlano = ({ id, isAdmin, nomePlano, beneficios, tempo, preco, token, se
 
         if (response.status === 200) {
           Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
+            title: "Plano deletado com sucesso.",
             icon: "success"
           });
           pegaPlanos()

@@ -4,8 +4,29 @@ import CardBeneficio from "../components/CardBeneficio";
 import Titulo from "../components/Titulo";
 import CardModalidade from "../components/CardModalidade";
 import CardPlano from "../components/CardPlano";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Home = () => {
+    const [planosDestaque, setPlanosDestaque] = useState([]);
+
+    const url = "http://localhost:5001/planos"
+
+    async function pegarPlanos () {
+        try {
+            const response = await axios.get(`${url}/3`);
+            if (response.status === 200) {
+                setPlanosDestaque(response.data.planos);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        pegarPlanos()
+    }, [])
+
     return (
         <section className="bg-black opacity-90">
             <section className="relative md:min-h-screen h-100 flex items-end md:items-center justify-end p-8">
@@ -98,24 +119,21 @@ const Home = () => {
             </section>
             <section className="min-h-screen flex flex-col items-center bg-black opacity-90">
                 <Titulo frase="Planos" />
-                <section className="flex flex-col md:flex-row gap-4 mt-10">
+                <section className="flex flex-col justify-center items-center md:flex-row gap-4 mt-10">
                     
-                    <CardPlano 
-                        nomePlano="Plano Black" 
-                        beneficios={[
-                            {
-                                "nome": "Musculação",
-                                "ativo": true
-                            },
-                            {
-                                "nome": "Pilates",
-                                "ativo": false
-                            }
-                        ]}
-                        tempo="2"
-                        preco="12,99"
-                    />
-
+                    {planosDestaque?.length > 0 ? (
+                        planosDestaque.map((plano) => (
+                            <CardPlano
+                                key={plano.id}
+                                nomePlano={plano.nome}
+                                beneficios={plano.beneficios}
+                                tempo={plano.tempo}
+                                preco={plano.preco}
+                            />
+                        ))
+                    ) : (
+                        <p className="text-2xl text-gray-400 uppercase font-bold">Nenhum plano existente</p>
+                    )}
                 </section>
             </section>
         </section>
