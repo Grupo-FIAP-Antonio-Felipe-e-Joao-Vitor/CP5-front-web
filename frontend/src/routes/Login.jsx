@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom"
 
-const Login = ({ setUsuario }) => {
+const Login = ({ setUsuario, setToken }) => {
     const { register, handleSubmit, reset } = useForm();
     const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ const Login = ({ setUsuario }) => {
                 const token = response.data.token;
                 const usuario = response.data.usuario;
 
+                setToken(token)
                 setUsuario(usuario)
                 localStorage.setItem("token", token);
                 localStorage.setItem("usuario", JSON.stringify(usuario));
@@ -25,7 +26,6 @@ const Login = ({ setUsuario }) => {
 
                 navigate("/")
                 reset();
-
             }
         } catch (error) {
             const status = error.response.status;

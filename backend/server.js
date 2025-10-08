@@ -93,16 +93,26 @@ app.post("/login", async (req, res) => {
 
 // Verificar se o usuario está logado
 const autenticaToken = (req, res, next) => {
-    const auth = req.headers['authorization'];
+    const auth = req.headers['authorization']; // tudo minúsculo!
+    console.log("Header recebido:", auth); // <--- log importante
+
     const token = auth && auth.split(' ')[1];
-    if (token == null) return res.sendStatus(401);
+    if (!token) {
+        console.log("Nenhum token recebido!");
+        return res.sendStatus(401);
+    }
 
     jwt.verify(token, JWT_SECRET, (error, user) => {
-        if (error) return res.sendStatus(403)
+        if (error) {
+            console.log("Erro ao verificar token:", error.message);
+            return res.sendStatus(403);
+        }
+        console.log("Token verificado com sucesso:", user);
         req.user = user;
         next();
-    })
-}
+    });
+};
+
 
 // Adicionar plano
 app.post("/planos", autenticaToken, (req, res) => {

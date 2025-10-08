@@ -12,7 +12,7 @@ const CriarPlano = ({ usuario, setUsuario, token, setToken }) => {
     const url = "http://localhost:5001/planos"
 
     function verificaUsuario() {
-        if (!usuario || !token) {
+        if (!usuario) {
             navigate("/registro");
             Swal.fire({
                 icon: "error",
@@ -32,7 +32,7 @@ const CriarPlano = ({ usuario, setUsuario, token, setToken }) => {
         }
     }
 
-    async function criar (data) {
+    async function criar(data) {
         const novoPlano = {
             "nome": data.nome,
             "beneficios": [
@@ -47,21 +47,56 @@ const CriarPlano = ({ usuario, setUsuario, token, setToken }) => {
             "preco": data.preco
         }
 
+        console.log("Token atual: ", token);
+        
+
         try {
-            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-            const response = await axios.post(url, novoPlano)
+            const response = await axios.post(url, novoPlano, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (response.status === 201) {
+                Swal.fire({
+                    icon: "sucess",
+                    title: "Plano criado com sucesso."
+                })
+                reset()
+                navigate("/planos")
+            }
         } catch (error) {
-            if (error.response.status === 403) {
+            const status = error.response.status
+            const result = error.response.data
+            if (status === 403) {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
                     text: "O seu acesso expirou",
                 })
+                console.log(error);
                 localStorage.removeItem("token")
                 localStorage.removeItem("usuario")
                 setToken(null)
                 setUsuario(null)
                 navigate("/")
+            }
+
+            if (status === 401) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Você não tem permissão para acessar esta área",
+                })
+                navigate("/")
+            }
+
+            if (status === 400) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: result.message,
+                })
+                reset()
             }
         }
     }

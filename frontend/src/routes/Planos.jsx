@@ -25,7 +25,7 @@ const Planos = ({ usuario }) => {
 
     return (
         <section className="bg-black opacity-90 p-6">
-            <section className="flex flex-wrap mt-20 md:mt-10 justify-center items-center gap-6 min-h-screen">
+            <section className="flex flex-wrap mt-20 md:mt-20 justify-center items-center gap-6 min-h-screen">
                 {listaPlanos && listaPlanos.length > 0 ? (
                     listaPlanos.map((plano) => (
                         <CardPlano
