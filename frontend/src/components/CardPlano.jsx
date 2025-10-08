@@ -1,7 +1,23 @@
-import { MdBlock, MdDone } from "react-icons/md";
-const CardPlano = ({ nomePlano, beneficios, tempo, preco }) => {
+import { MdBlock, MdDone, MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
+const CardPlano = ({ id, isAdmin, nomePlano, beneficios, tempo, preco }) => {
+    
     return (
-        <div className="w-[320px] h-[550px] bg-gray-900 border border-gray-700 rounded-3xl p-6 flex flex-col items-center justify-between shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <div className="w-[320px] h-[550px] relative bg-gray-900 border border-gray-700 rounded-3xl p-6 flex flex-col items-center justify-between shadow-lg hover:shadow-2xl transition-shadow duration-300">
+
+            { isAdmin ? (
+                <div className="flex gap-2 absolute left-3 top-3">
+                    <span 
+                        className="text-gray-400 hover:text-white cursor-pointer transition-colors duration-300 text-2xl"
+                    >
+                        <MdOutlineDelete />
+                    </span>
+                    <span 
+                        className="text-gray-400 hover:text-white cursor-pointer transition-colors duration-300 text-2xl"
+                    >
+                        <MdOutlineEdit />
+                    </span>
+                </div>
+            ) : (null)}
 
             <div className="text-yellow-400 font-extrabold uppercase px-4 py-1 rounded-full text-3xl mb-4">
                 {nomePlano}

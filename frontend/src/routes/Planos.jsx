@@ -35,6 +35,8 @@ const Planos = ({ usuario }) => {
                         {listaPlanos.map((plano) => (
                             <CardPlano
                                 key={plano.id}
+                                id={plano.id}
+                                isAdmin={isAdmin}
                                 nomePlano={plano.nome}
                                 beneficios={plano.beneficios}
                                 tempo={plano.tempo}
