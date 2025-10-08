@@ -23,37 +23,52 @@ const Planos = ({ usuario }) => {
         pegaPlanos();
     }, []);
 
+    const semPlanos = !listaPlanos || listaPlanos.length === 0;
+    const isAdmin = usuario && usuario.role === "Admin";
+
     return (
         <section className="bg-black opacity-90 p-6">
-            <section className="flex flex-wrap mt-20 md:mt-20 justify-center items-center gap-6 min-h-screen">
-                {listaPlanos && listaPlanos.length > 0 ? (
-                    listaPlanos.map((plano) => (
-                        <CardPlano
-                            key={plano.id}
-                            nomePlano={plano.nome}
-                            beneficios={plano.beneficios}
-                            tempo={plano.tempo}
-                            preco={plano.preco}
-                        />
-                    ))
+            <section className="flex flex-col items-center gap-8 mt-20 min-h-screen">
+
+                {!semPlanos ? (
+                    <section className="flex flex-wrap justify-center items-center gap-6">
+                        {listaPlanos.map((plano) => (
+                            <CardPlano
+                                key={plano.id}
+                                nomePlano={plano.nome}
+                                beneficios={plano.beneficios}
+                                tempo={plano.tempo}
+                                preco={plano.preco}
+                            />
+                        ))}
+
+                        {isAdmin && (
+                            <Link
+                                to="/criarPlano"
+                                className="bg-gray-900 border-4 border-dashed border-gray-700 rounded-3xl p-6 flex items-center justify-center w-[320px] h-[550px] cursor-pointer hover:border-gray-500 hover:text-gray-500 text-gray-700"
+                            >
+                                <MdOutlineAdd className="size-30" />
+                            </Link>
+                        )}
+                    </section>
                 ) : (
-                    <h1 className="uppercase font-extrabold text-4xl text-yellow-400">
-                        Nenhum plano disponível
-                    </h1>
+                    <section className="flex flex-col items-center gap-6">
+                        <h1 className="uppercase font-extrabold text-4xl text-yellow-400 text-center">
+                            Nenhum plano disponível
+                        </h1>
+
+                        {isAdmin && (
+                            <Link
+                                to="/criarPlano"
+                                className="bg-gray-900 border-4 border-dashed border-gray-700 rounded-3xl p-6 flex items-center justify-center w-[320px] h-[550px] cursor-pointer hover:border-gray-500 hover:text-gray-500 text-gray-700"
+                            >
+                                <MdOutlineAdd className="size-30" />
+                            </Link>
+                        )}
+                    </section>
                 )}
-                { usuario && usuario.role === "Admin" ?
-                    (
-                        <Link 
-                            to="/criarPlano"
-                            className="bg-gray-900 border-4 border-dashed border-gray-700 rounded-3xl p-6 flex items-center justify-center w-[320px] h-[550px] cursor-pointer hover:border-gray-500 hover:text-gray-500 text-gray-700"
-                        >
-                            <MdOutlineAdd className="size-30"/>
-                        </Link>
-                    ) : (null)
-                }
             </section>
         </section>
-
     );
 };
 
