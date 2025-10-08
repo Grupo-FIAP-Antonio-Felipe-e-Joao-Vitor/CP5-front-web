@@ -1,34 +1,34 @@
 [
   {
     "id": 1,
-    "nome": "Plano Smart",
+    "nome": "Smart2",
     "beneficios": [
       {
-        "nome": "Musculação",
+        "nome": "musculacao",
         "ativo": true
       },
       {
-        "nome": "Crossfit",
+        "nome": "crossfit",
         "ativo": true
       },
       {
-        "nome": "Funcional",
+        "nome": "funcional",
         "ativo": true
       },
       {
-        "nome": "Dança",
+        "nome": "danca",
         "ativo": true
       },
       {
-        "nome": "Pilates",
+        "nome": "pilates",
         "ativo": true
       },
       {
-        "nome": "Personal Trainer",
+        "nome": "personal",
         "ativo": false
       }
     ],
-    "tempo": "4",
-    "preco": "59,99"
+    "tempo": "2",
+    "preco": "23"
   }
 ]

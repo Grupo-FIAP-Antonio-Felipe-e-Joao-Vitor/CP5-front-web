@@ -36,19 +36,16 @@ const CriarPlano = ({ usuario, setUsuario, token, setToken }) => {
     const novoPlano = {
       "nome": data.nome,
       "beneficios": [
-        { "nome": "Musculação", "ativo": data.musculacao },
-        { "nome": "Crossfit", "ativo": data.crossfit },
-        { "nome": "Funcional", "ativo": data.funcional },
-        { "nome": "Dança", "ativo": data.danca },
-        { "nome": "Pilates", "ativo": data.pilates },
-        { "nome": "Personal Trainer", "ativo": data.personal }
+        { "nome": "musculacao", "ativo": data.musculacao },
+        { "nome": "crossfit", "ativo": data.crossfit },
+        { "nome": "funcional", "ativo": data.funcional },
+        { "nome": "danca", "ativo": data.danca },
+        { "nome": "pilates", "ativo": data.pilates },
+        { "nome": "personal", "ativo": data.personal }
       ],
       "tempo": data.tempo,
       "preco": data.preco
     }
-
-    console.log("Token atual: ", token);
-
 
     try {
       const response = await axios.post(url, novoPlano, {
@@ -73,7 +70,6 @@ const CriarPlano = ({ usuario, setUsuario, token, setToken }) => {
           title: "Oops...",
           text: "O seu acesso expirou",
         })
-        console.log(error);
         localStorage.removeItem("token")
         localStorage.removeItem("usuario")
         setToken(null)

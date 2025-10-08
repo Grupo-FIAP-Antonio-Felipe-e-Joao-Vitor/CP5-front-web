@@ -4,8 +4,14 @@ import { MdBlock, MdDone, MdOutlineDelete, MdOutlineEdit } from "react-icons/md"
 import { useNavigate } from "react-router-dom";
 const CardPlano = ({ id, isAdmin, nomePlano, beneficios, tempo, preco, token, setToken, setUsuario, pegaPlanos }) => {
 
+  const plano = { id: id, nome: nomePlano, beneficios: beneficios, tempo: tempo, preco: preco }
+
   const navigate = useNavigate()
   const url = "http://localhost:5001/planos";
+
+  function editarPlano (dados) {
+    navigate("/editarPlano", { state: { dados: dados } })
+  }
 
   async function removerPlano(id) {
     try {
@@ -78,6 +84,7 @@ const CardPlano = ({ id, isAdmin, nomePlano, beneficios, tempo, preco, token, se
             <MdOutlineDelete />
           </span>
           <span
+          onClick={() => editarPlano(plano)}
             className="text-gray-400 hover:text-white cursor-pointer transition-colors duration-300 text-2xl"
           >
             <MdOutlineEdit />
@@ -98,13 +105,13 @@ const CardPlano = ({ id, isAdmin, nomePlano, beneficios, tempo, preco, token, se
             (
               <li key={beneficio.nome} className="flex items-center gap-3" >
                 <MdDone className="text-green-400 text-2xl" />
-                <span className="text-green-500 font-semibold text-lg">{beneficio.nome}</span>
+                <span className="text-green-500 font-semibold text-lg">{beneficio.nome.toUpperCase()}</span>
               </li>
             )
           ) : ((
             <li key={beneficio.nome} className="flex items-center gap-3" >
               <MdBlock className="text-red-500 text-2xl" />
-              <span className="text-red-500 font-semibold text-lg">{beneficio.nome}</span>
+              <span className="text-red-500 font-semibold text-lg">{beneficio.nome.toUpperCase()}</span>
             </li>
           ))
         )}

@@ -7,6 +7,7 @@ import Sobre from "./routes/Sobre"
 import Planos from "./routes/Planos"
 import { useState } from "react"
 import CriarPlano from "./routes/CriarPlano"
+import EditarPlano from "./routes/EditarPlano"
 
 function App() {
   
@@ -31,6 +32,7 @@ function App() {
           <Route path="/sobre" element={<Sobre />}/>
           <Route path="/planos" element={<Planos usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken} />}/>
           <Route path="/criarPlano" element={<CriarPlano usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken}/>} />
+          <Route path="/editarPlano" element={<EditarPlano usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken}/>}/>
         </Routes>
       </main>
     </BrowserRouter>
