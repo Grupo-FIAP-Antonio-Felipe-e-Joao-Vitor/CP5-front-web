@@ -11,7 +11,6 @@ const PORT = 5001;
 
 const caminhoUsuarios = path.join(__dirname, "./data/usuarios.json");
 const caminhoPlanos = path.join(__dirname, "./data/planos.json");
-const caminhoTreinos = path.join(__dirname, "./data/treinos.json")
 
 const app = express();
 app.use(express.json());
@@ -43,7 +42,7 @@ app.post("/registro", async (req, res) => {
     if (usuarios.find(u => u.cpf === cpf)) return res.status(400).json({ message: "Este CPF já está sendo utilizado." });
 
     const hashSenha = await bcrypt.hash(senha, 10);
-    const novoUsuario = { id: gerarID(usuarios), email: email, cpf: cpf, hashSenha: hashSenha, role: "User" };
+    const novoUsuario = { id: gerarID(usuarios), email: email, cpf: cpf, hashSenha: hashSenha, treinos: [], role: "User" };
     usuarios.push(novoUsuario);
     salvarDados(caminhoUsuarios, usuarios);
     return res.status(201).json({ message: "Usuário registrado com sucesso." });
@@ -217,21 +216,21 @@ app.delete("/planos/:id", autenticaToken, (req, res) => {
 // CRUD treinos
 
 // Adicionar treinos
-
 app.post("/treinos", autenticaToken, (req, res) => {
   try {
     const { treino, repeticoes, serie, dia } = req.body;
     
     if (!treino || !repeticoes || !serie || !dia) return res.status(400).json({ message: "Todos os dados são obrigratórios" });
 
-    const treinos = consultarDados(caminhoTreinos);
-    const novoTreino = { id: gerarID(treinos), treino: treino, repeticoes: repeticoes, serie: serie, dia: dia, feito: false };
+    const usuarios = consultarDados(caminhoUsuarios)
+    const usuario = usuarios.find((u) => Number(u.id) === Number(req.user.id))
 
-    treinos.push(novoTreino);
-    salvarDados(caminhoTreinos, treinos);
+    const novoTreino = { id: gerarID(usuario.treinos), treino: treino, repeticoes: repeticoes, serie: serie, dia: dia, feito: false };
+
+    usuario.treinos.push(novoTreino);
+    salvarDados(caminhoUsuarios, usuarios);
 
     return res.status(200).json({ message: "Treino criado com sucesso." })
-
   } catch (error) {
     return res.status(500).json({ message: "Erro interno.", error: error });
   }

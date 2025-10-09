@@ -4,6 +4,7 @@
     "email": "a@a",
     "cpf": "1",
     "hashSenha": "$2b$10$vOjhWW9pHuyAKWQ0ZaaYUu76.Pe19UKA8W8sdyXRy4YHODrByTJsK",
+    "treinos": [],
     "role": "Admin"
   },
   {
@@ -18,6 +19,23 @@
     "email": "b@b",
     "cpf": "22",
     "hashSenha": "$2b$10$OvRLmhqIbRo9BSGNz6Ir1.Wf7YtomTcV/THtuC0LJ7Eqzejjex7LG",
+    "role": "User"
+  },
+  {
+    "id": 4,
+    "email": "teste@teste",
+    "cpf": "12",
+    "hashSenha": "$2b$10$txIt9bKk7EjraT5x.ua4/O8lUXVKtnunJnvxuz0XJuPPwaBRx49z2",
+    "treinos": [
+      {
+        "id": 1,
+        "treino": "Braço",
+        "repeticoes": "10",
+        "serie": "3",
+        "dia": "20/10",
+        "feito": false
+      }
+    ],
     "role": "User"
   }
 ]
