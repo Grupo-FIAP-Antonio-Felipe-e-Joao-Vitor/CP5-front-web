@@ -28,7 +28,7 @@ function App() {
       <main>
         <Routes>
           <Route path="*" element={<Error />}/>
-          <Route path="/" element={<Home />}/>
+          <Route path="/" element={<Home usuario={usuario}/>}/>
           <Route path="/registro" element={<Registro />}/>
           <Route path="/login" element={<Login setUsuario={setUsuario} setToken={setToken}/>}/>
           <Route path="/sobre" element={<Sobre />}/>

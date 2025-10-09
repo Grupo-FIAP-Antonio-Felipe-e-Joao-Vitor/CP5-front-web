@@ -1,4 +1,4 @@
-import { MdFitnessCenter, MdElectricBolt, MdSupportAgent, MdDirectionsRun, MdMusicNote, MdSelfImprovement, MdPerson} from "react-icons/md";
+import { MdFitnessCenter, MdElectricBolt, MdSupportAgent, MdDirectionsRun, MdMusicNote, MdSelfImprovement, MdPerson } from "react-icons/md";
 import HeroIMG from "../assets/hero.png";
 import imagemDepoimento1 from "../assets/imagemDepoimento1.png"
 import imagemDepoimento2 from "../assets/imagemDepoimento2.png"
@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CardDepoimento from "../components/CardDepoimento";
 
-const Home = () => {
+const Home = ({ usuario }) => {
   const [planosDestaque, setPlanosDestaque] = useState([]);
 
   const url = "http://localhost:5001/planos"
@@ -157,21 +157,21 @@ const Home = () => {
         <Titulo frase="Depoimentos" />
         <section className="flex flex-col md:flex-row gap-4 mt-10">
 
-          <CardDepoimento 
+          <CardDepoimento
             imagem={imagemDepoimento1}
             nome="Laura"
             email="laura@gmail.com"
             depoimento="Treinar na Smart Gym é uma experiência incrível. Clima acolhedor, energia positiva e resultados reais. Recomendo pra todos que querem mudar de vida!"
           />
 
-          <CardDepoimento 
+          <CardDepoimento
             imagem={imagemDepoimento2}
             nome="André"
             email="andre@gmail.com"
             depoimento="A Smart Gym transformou minha rotina! Os treinos são dinâmicos, os professores super atenciosos e o ambiente é sempre motivador. Me sinto melhor a cada dia!"
           />
 
-          <CardDepoimento 
+          <CardDepoimento
             imagem={imagemDepoimento3}
             nome="Lucas"
             email="lucas@gmail.com"
@@ -179,6 +179,40 @@ const Home = () => {
           />
 
         </section>
+      </section>
+      <section className="flex flex-col min-h-screen justify-center items-center">
+        <Titulo frase="Contato" />
+        <form className="flex flex-col gap-4 p-6 max-w-3xl w-full">
+          <div className="flex flex-col gap-2 w-full">
+            <label className="text-white text-lg md:text-2xl uppercase font-bold">
+              Email
+            </label>
+            <input
+              className="border-2 border-white rounded h-10 text-gray-100 px-2 bg-transparent focus:outline-none focus:border-yellow-400"
+              placeholder="Digite o seu email"
+              type="email"
+              defaultValue={usuario?.email || ""}
+              required
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label className="text-white text-lg md:text-2xl uppercase font-bold">
+              Em que podemos ajudar?
+            </label>
+            <textarea 
+              className="border-2 border-white rounded h-50 text-gray-100 px-2 bg-transparent focus:outline-none focus:border-yellow-400"
+              placeholder="Digite o assunto do email"
+              type="text"
+              required
+            ></textarea>
+          </div>
+          <button
+            className="text-xl md:text-2xl w-full uppercase text-black font-bold cursor-pointer hover:bg-transparent hover:text-white hover:border-2 hover:border-yellow-400 transition-all duration-300 bg-yellow-400 rounded py-2"
+            type="submit"
+          >
+            Enviar
+          </button>
+        </form>
       </section>
     </section>
   );
