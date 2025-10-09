@@ -1,5 +1,8 @@
-import { MdFitnessCenter, MdElectricBolt, MdSupportAgent, MdDirectionsRun, MdMusicNote, MdSelfImprovement, MdPerson, MdBlock, MdDone } from "react-icons/md";
+import { MdFitnessCenter, MdElectricBolt, MdSupportAgent, MdDirectionsRun, MdMusicNote, MdSelfImprovement, MdPerson} from "react-icons/md";
 import HeroIMG from "../assets/hero.png";
+import imagemDepoimento1 from "../assets/imagemDepoimento1.png"
+import imagemDepoimento2 from "../assets/imagemDepoimento2.png"
+import imagemDepoimento3 from "../assets/imagemDepoimento3.png"
 import CardBeneficio from "../components/CardBeneficio";
 import Titulo from "../components/Titulo";
 import CardModalidade from "../components/CardModalidade";
@@ -7,6 +10,7 @@ import CardPlano from "../components/CardPlano";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CardDepoimento from "../components/CardDepoimento";
 
 const Home = () => {
   const [planosDestaque, setPlanosDestaque] = useState([]);
@@ -147,6 +151,33 @@ const Home = () => {
           ) : (
             <p className="text-2xl text-gray-400 uppercase font-bold">Nenhum plano existente</p>
           )}
+        </section>
+      </section>
+      <section className="min-h-screen flex flex-col items-center bg-black opacity-90">
+        <Titulo frase="Depoimentos" />
+        <section className="flex flex-col md:flex-row gap-4 mt-10">
+
+          <CardDepoimento 
+            imagem={imagemDepoimento1}
+            nome="Laura"
+            email="laura@gmail.com"
+            depoimento="Treinar na Smart Gym é uma experiência incrível. Clima acolhedor, energia positiva e resultados reais. Recomendo pra todos que querem mudar de vida!"
+          />
+
+          <CardDepoimento 
+            imagem={imagemDepoimento2}
+            nome="André"
+            email="andre@gmail.com"
+            depoimento="A Smart Gym transformou minha rotina! Os treinos são dinâmicos, os professores super atenciosos e o ambiente é sempre motivador. Me sinto melhor a cada dia!"
+          />
+
+          <CardDepoimento 
+            imagem={imagemDepoimento3}
+            nome="Lucas"
+            email="lucas@gmail.com"
+            depoimento="Excelente estrutura e equipamentos de primeira! A equipe da Smart Gym sempre me ajuda a alcançar meus objetivos com segurança e dedicação."
+          />
+
         </section>
       </section>
     </section>
