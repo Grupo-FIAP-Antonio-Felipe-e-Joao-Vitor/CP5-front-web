@@ -11,6 +11,7 @@ const PORT = 5001;
 
 const caminhoUsuarios = path.join(__dirname, "./data/usuarios.json");
 const caminhoPlanos = path.join(__dirname, "./data/planos.json");
+const caminhoTreinos = path.join(__dirname, "./data/treinos.json")
 
 const app = express();
 app.use(express.json());
@@ -208,6 +209,29 @@ app.delete("/planos/:id", autenticaToken, (req, res) => {
     salvarDados(caminhoPlanos, planos);
 
     return res.status(200).json({ message: "Plano removido.", plano: planoRemovido })
+  } catch (error) {
+    return res.status(500).json({ message: "Erro interno.", error: error });
+  }
+})
+
+// CRUD treinos
+
+// Adicionar treinos
+
+app.post("/treinos", autenticaToken, (req, res) => {
+  try {
+    const { treino, repeticoes, serie, dia } = req.body;
+    
+    if (!treino || !repeticoes || !serie || !dia) return res.status(400).json({ message: "Todos os dados são obrigratórios" });
+
+    const treinos = consultarDados(caminhoTreinos);
+    const novoTreino = { id: gerarID(treinos), treino: treino, repeticoes: repeticoes, serie: serie, dia: dia, feito: false };
+
+    treinos.push(novoTreino);
+    salvarDados(caminhoTreinos, treinos);
+
+    return res.status(200).json({ message: "Treino criado com sucesso." })
+
   } catch (error) {
     return res.status(500).json({ message: "Erro interno.", error: error });
   }
