@@ -8,6 +8,7 @@ import Planos from "./routes/Planos"
 import { useState } from "react"
 import CriarPlano from "./routes/CriarPlano"
 import EditarPlano from "./routes/EditarPlano"
+import Error from "./routes/Error"
 
 function App() {
   
@@ -26,6 +27,7 @@ function App() {
       <Header usuario={usuario} setUsuario={setUsuario}/>
       <main>
         <Routes>
+          <Route path="*" element={<Error />}/>
           <Route path="/" element={<Home />}/>
           <Route path="/registro" element={<Registro />}/>
           <Route path="/login" element={<Login setUsuario={setUsuario} setToken={setToken}/>}/>
