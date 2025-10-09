@@ -9,6 +9,7 @@ import { useState } from "react"
 import CriarPlano from "./routes/CriarPlano"
 import EditarPlano from "./routes/EditarPlano"
 import Error from "./routes/Error"
+import Footer from "./components/Footer"
 
 function App() {
   
@@ -37,6 +38,7 @@ function App() {
           <Route path="/editarPlano" element={<EditarPlano usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken}/>}/>
         </Routes>
       </main>
+      <Footer />
     </BrowserRouter>
   )
 }
