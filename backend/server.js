@@ -236,5 +236,21 @@ app.post("/treinos", autenticaToken, (req, res) => {
   }
 })
 
+// Ver todos os treinos
+app.get("/treinos", autenticaToken, (req, res) => {
+  try {
+    const usuarios = consultarDados(caminhoUsuarios)
+    const usuario = usuarios.find((u) => Number(u.id) === Number(req.user.id))
+
+    if (!usuario) return res.status(404).json({ message: "Usuário não encontrado." });
+
+    const treinos = usuario.treinos;
+    return res.status(200).json({ treinos: treinos })
+
+  } catch (error) {
+    return res.status(500).json({ message: "Erro interno.", error: error });
+  }
+})
+
 
 app.listen(PORT, console.log(`Servidor rodando em http://${HOST}:${PORT}`))
