@@ -11,6 +11,7 @@ import CriarPlano from "./routes/CriarPlano"
 import EditarPlano from "./routes/EditarPlano"
 import Error from "./routes/Error"
 import Footer from "./components/Footer"
+import CriarTreino from "./routes/CriarTreino"
 
 function App() {
   
@@ -38,6 +39,7 @@ function App() {
           <Route path="/treinos" element={<Treinos usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken} />}/>
           <Route path="/criarPlano" element={<CriarPlano usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken}/>} />
           <Route path="/editarPlano" element={<EditarPlano usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken}/>}/>
+          <Route path="/criarTreino" element={<CriarTreino usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken}/>}/>
         </Routes>
       </main>
       <Footer />

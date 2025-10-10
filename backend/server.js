@@ -230,7 +230,7 @@ app.post("/treinos", autenticaToken, (req, res) => {
     usuario.treinos.push(novoTreino);
     salvarDados(caminhoUsuarios, usuarios);
 
-    return res.status(200).json({ message: "Treino criado com sucesso." })
+    return res.status(201).json({ message: "Treino criado com sucesso." })
   } catch (error) {
     return res.status(500).json({ message: "Erro interno.", error: error });
   }
@@ -251,6 +251,68 @@ app.get("/treinos", autenticaToken, (req, res) => {
     return res.status(500).json({ message: "Erro interno.", error: error });
   }
 })
+
+// Finalizar treino (atualizar apenas o campo 'feito')
+app.put("/treino/:id", autenticaToken, (req, res) => {
+  try {
+    const { id } = req.params;
+    const { feito } = req.body;
+
+    if (feito === undefined)
+      return res.status(400).json({ message: "O campo 'feito' é obrigatório." });
+
+    const usuarios = consultarDados(caminhoUsuarios);
+    const usuario = usuarios.find((u) => Number(u.id) === Number(req.user.id));
+
+    if (!usuario)
+      return res.status(404).json({ message: "Usuário não encontrado." });
+
+    const treino = usuario.treinos.find((t) => Number(t.id) === Number(id));
+
+    if (!treino)
+      return res.status(404).json({ message: "Treino não encontrado." });
+
+    // Atualiza apenas o campo 'feito'
+    treino.feito = feito;
+
+    salvarDados(caminhoUsuarios, usuarios);
+
+    return res.status(200).json({
+      message: "Status do treino atualizado com sucesso.",
+      treino: treino,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Erro interno.", error: error });
+  }
+});
+
+// Deletar treino
+app.delete("/treino/:id", autenticaToken, (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const usuarios = consultarDados(caminhoUsuarios);
+    const usuario = usuarios.find((u) => Number(u.id) === Number(req.user.id));
+
+    if (!usuario)
+      return res.status(404).json({ message: "Usuário não encontrado." });
+
+    const treinoIndex = usuario.treinos.findIndex((t) => Number(t.id) === Number(id));
+
+    if (treinoIndex === -1)
+      return res.status(404).json({ message: "Treino não encontrado." });
+
+    // Remove o treino
+    usuario.treinos.splice(treinoIndex, 1);
+
+    salvarDados(caminhoUsuarios, usuarios);
+
+    return res.status(200).json({ message: "Treino removido com sucesso." });
+  } catch (error) {
+    return res.status(500).json({ message: "Erro interno.", error: error });
+  }
+});
+
 
 
 app.listen(PORT, console.log(`Servidor rodando em http://${HOST}:${PORT}`))
