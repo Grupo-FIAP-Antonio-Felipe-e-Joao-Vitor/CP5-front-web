@@ -5,6 +5,7 @@ import Registro from "./routes/Registro"
 import Login from "./routes/Login"
 import Sobre from "./routes/Sobre"
 import Planos from "./routes/Planos"
+import Treinos from "./routes/Treinos"
 import { useState } from "react"
 import CriarPlano from "./routes/CriarPlano"
 import EditarPlano from "./routes/EditarPlano"
@@ -34,6 +35,7 @@ function App() {
           <Route path="/login" element={<Login setUsuario={setUsuario} setToken={setToken}/>}/>
           <Route path="/sobre" element={<Sobre />}/>
           <Route path="/planos" element={<Planos usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken} />}/>
+          <Route path="/treinos" element={<Treinos usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken} />}/>
           <Route path="/criarPlano" element={<CriarPlano usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken}/>} />
           <Route path="/editarPlano" element={<EditarPlano usuario={usuario} setUsuario={setUsuario} token={token} setToken={setToken}/>}/>
         </Routes>
